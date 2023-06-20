@@ -1,9 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import authSchema from '../schema/authSchema';
 
 const Signin = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [isValid, setIsValid] = React.useState(false);
+
+  React.useEffect(() => {
+    authSchema.email.value = email;
+    authSchema.password.value = password;
+
+    const isValidEmail = authSchema.email.valid;
+    const isValidPassword = authSchema.password.valid;
+
+    if (isValidEmail && isValidPassword) {
+      setIsValid(true);
+    }
+  }, [email, password]);
 
   return (
     <Container>
@@ -31,7 +45,9 @@ const Signin = () => {
             }}
           />
         </Label>
-        <Button data-testid="signin-button">로그인</Button>
+        <Button data-testid="signin-button" disabled={!isValid}>
+          로그인
+        </Button>
       </Form>
     </Container>
   );
