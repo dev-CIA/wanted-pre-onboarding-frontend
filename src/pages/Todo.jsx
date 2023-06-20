@@ -1,4 +1,5 @@
 import React from 'react';
+import { AddTodoInput } from '../components';
 
 const mockData = [
   {
@@ -17,12 +18,10 @@ const mockData = [
 
 const Todo = () => {
   console.log();
+
   return (
     <>
-      <div>
-        <input data-testid="new-todo-input" />
-        <button data-testid="new-todo-add-button">추가</button>
-      </div>
+      <AddTodoInput />
       {mockData.map(data => (
         <li key={data.id}>
           <label>
