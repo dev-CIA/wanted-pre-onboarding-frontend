@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import authSchema from '../schema/authSchema';
+import { AutoFormTitle, AuthFormContainer, FormLabel, FormInput, SubmitButton } from '../components';
 
 const Signup = () => {
   const [email, setEmail] = React.useState('');
@@ -21,11 +22,11 @@ const Signup = () => {
 
   return (
     <Container>
-      <Title>회원가입</Title>
-      <Form>
-        <Label>
+      <AutoFormTitle>회원가입</AutoFormTitle>
+      <AuthFormContainer>
+        <FormLabel>
           이메일
-          <Input
+          <FormInput
             data-testid="email-input"
             type="text"
             value={email}
@@ -33,10 +34,10 @@ const Signup = () => {
               setEmail(e.target.value);
             }}
           />
-        </Label>
-        <Label>
+        </FormLabel>
+        <FormLabel>
           비밀번호
-          <Input
+          <FormInput
             data-testid="password-input"
             type="password"
             value={password}
@@ -44,11 +45,11 @@ const Signup = () => {
               setPassword(e.target.value);
             }}
           />
-        </Label>
-        <Button data-testid="signup-button" disabled={!isValid}>
+        </FormLabel>
+        <SubmitButton data-testid="signup-button" disabled={!isValid}>
           회원가입
-        </Button>
-      </Form>
+        </SubmitButton>
+      </AuthFormContainer>
     </Container>
   );
 };
@@ -57,35 +58,4 @@ export default Signup;
 
 const Container = styled.div`
   margin: 2em auto;
-`;
-
-const Title = styled.div`
-  margin: 0.5em;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  width: 20em;
-  border: 1px solid black;
-  padding: 2em;
-`;
-
-const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 2em;
-`;
-
-const Button = styled.button`
-  height: 2.5em;
-  font-weight: 500;
 `;

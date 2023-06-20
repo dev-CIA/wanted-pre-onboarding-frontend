@@ -13,7 +13,13 @@ const AddTodoInput = () => {
             setNewTodo(e.target.value);
           }}
         />
-        <button data-testid="new-todo-add-button">추가</button>
+        <button
+          data-testid="new-todo-add-button"
+          onClick={() => {
+            // data = [...data, newTodo];
+          }}>
+          추가
+        </button>
       </div>
     </>
   );
