@@ -5,7 +5,7 @@ const Signin = () => {
   console.log();
   return (
     <Container>
-      <Title>Wanted Todo</Title>
+      <Title>로그인</Title>
       <Form>
         <Label>
           이메일
