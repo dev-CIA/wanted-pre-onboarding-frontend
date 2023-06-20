@@ -31,7 +31,7 @@ const Signup = () => {
             }}
           />
         </Label>
-        <Button data-testid="signin-button">회원가입</Button>
+        <Button data-testid="signup-button">회원가입</Button>
       </Form>
     </Container>
   );
