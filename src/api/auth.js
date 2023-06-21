@@ -11,4 +11,14 @@ const postSignUp = async data => {
   }
 };
 
-export default postSignUp;
+const postSignin = async data => {
+  try {
+    const response = await axios.post(`${URL}/auth/signin`, data);
+    return response;
+  } catch (error) {
+    console.error('로그인 오류', error);
+    throw error;
+  }
+};
+
+export { postSignUp, postSignin };
