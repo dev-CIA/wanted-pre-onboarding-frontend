@@ -1,7 +1,14 @@
 import React from 'react';
+import { createTodo } from '../api';
 
-const AddTodoInput = () => {
+const AddTodoInput = ({ userData, setUserData }) => {
   const [newTodo, setNewTodo] = React.useState('');
+
+  const addTodo = async newTodo => {
+    const { data } = await createTodo(newTodo);
+    setUserData([...userData, data]);
+    setNewTodo('');
+  };
 
   return (
     <>
@@ -12,12 +19,9 @@ const AddTodoInput = () => {
           onChange={e => {
             setNewTodo(e.target.value);
           }}
+          placeholder="Enter new todo"
         />
-        <button
-          data-testid="new-todo-add-button"
-          onClick={() => {
-            // data = [...data, newTodo];
-          }}>
+        <button data-testid="new-todo-add-button" onClick={() => addTodo(newTodo)}>
           추가
         </button>
       </div>
