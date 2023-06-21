@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AutoFormTitle, AuthFormContainer, FormLabel, FormInput, SubmitButton } from '../components';
+import { Link } from 'react-router-dom';
+import { AutoFormTitle, AuthFormContainer, FormLabel, FormInput, SubmitButton, AuthMessage } from '../components';
 import useValidate from '../hooks/useValidate';
 
 const Signin = () => {
@@ -38,6 +39,9 @@ const Signin = () => {
         <SubmitButton data-testid="signin-button" disabled={!isValid}>
           로그인
         </SubmitButton>
+        <AuthMessage>
+          회원이 아니신가요? <Link to={'/signup'}>회원가입 하러 가기</Link>
+        </AuthMessage>
       </AuthFormContainer>
     </Container>
   );
