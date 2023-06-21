@@ -73,7 +73,7 @@ const List = styled.li`
   min-width: 480px;
   display: flex;
   gap: 5em;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   list-style: none;
 `;
