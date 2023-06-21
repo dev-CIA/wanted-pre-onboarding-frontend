@@ -1,26 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import authSchema from '../schema/authSchema';
 import { AutoFormTitle, AuthFormContainer, FormLabel, FormInput, SubmitButton } from '../components';
+import useValidate from '../hooks/useValidate';
 
 const Signin = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [isValid, setIsValid] = React.useState(false);
 
-  React.useEffect(() => {
-    authSchema.email.value = email;
-    authSchema.password.value = password;
-
-    const isValidEmail = authSchema.email.valid;
-    const isValidPassword = authSchema.password.valid;
-
-    if (isValidEmail && isValidPassword) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-  }, [email, password]);
+  const isValid = useValidate(email, password);
 
   return (
     <Container>

@@ -1,30 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import authSchema from '../schema/authSchema';
 import { AutoFormTitle, AuthFormContainer, FormLabel, FormInput, SubmitButton } from '../components';
-import postSignUp from '../api/auth';
+import { postSignUp } from '../api';
+import useValidate from '../hooks/useValidate';
 
 const Signup = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [isValid, setIsValid] = React.useState(false);
 
+  const isValid = useValidate(email, password);
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    authSchema.email.value = email;
-    authSchema.password.value = password;
-
-    const isValidEmail = authSchema.email.valid;
-    const isValidPassword = authSchema.password.valid;
-
-    if (isValidEmail && isValidPassword) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-  }, [email, password]);
 
   const submitSignup = async () => {
     const response = await postSignUp({
