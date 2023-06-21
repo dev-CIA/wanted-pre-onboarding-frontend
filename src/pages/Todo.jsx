@@ -28,7 +28,7 @@ const Todo = () => {
 
   return (
     <Container>
-      <Title>My Todo List</Title>
+      <Title>My List</Title>
       <AddInput userData={userData} setUserData={setUserData} />
       {userData.map(data => (
         <TodoItem key={data.id} data={data} userData={userData} setUserData={setUserData} />
