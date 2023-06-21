@@ -3,13 +3,13 @@ import { CheckCompleted } from '.';
 import { updateTodo, deleteTodo } from '../../api';
 
 const TodoItem = ({ data, userData, setUserData }) => {
-  const [isModifyMode, setIsModifiyMode] = React.useState(false);
+  const [isUpdateMode, setIsUpdateMode] = React.useState(false);
   const [updatedTodo, setUpdatedTodo] = React.useState('');
 
   const updateData = async ({ id, isCompleted }) => {
     await updateTodo({ id, todo: updatedTodo, isCompleted });
     setUserData(userData.map(data => (data.id === id ? { ...data, todo: updatedTodo } : data)));
-    setIsModifiyMode(false);
+    setIsUpdateMode(false);
   };
 
   const deleteData = async id => {
@@ -22,7 +22,7 @@ const TodoItem = ({ data, userData, setUserData }) => {
       <li>
         <label>
           <CheckCompleted {...data} />
-          {isModifyMode ? (
+          {isUpdateMode ? (
             <input
               data-testid="modify-input"
               ref={node => node?.focus()}
@@ -35,7 +35,7 @@ const TodoItem = ({ data, userData, setUserData }) => {
             <span>{data.todo}</span>
           )}
         </label>
-        {isModifyMode ? (
+        {isUpdateMode ? (
           <>
             <button data-testid="submit-button" onClick={() => updateData(data)}>
               제출
@@ -43,7 +43,7 @@ const TodoItem = ({ data, userData, setUserData }) => {
             <button
               data-testid="cancel-button"
               onClick={() => {
-                setIsModifiyMode(false);
+                setIsUpdateMode(false);
               }}>
               취소
             </button>
@@ -53,7 +53,7 @@ const TodoItem = ({ data, userData, setUserData }) => {
             <button
               data-testid="modify-button"
               onClick={() => {
-                setIsModifiyMode(true);
+                setIsUpdateMode(true);
                 setUpdatedTodo(data.todo);
               }}>
               수정
