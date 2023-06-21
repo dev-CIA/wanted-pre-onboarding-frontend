@@ -1,12 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import authSchema from '../schema/authSchema';
 import { AutoFormTitle, AuthFormContainer, FormLabel, FormInput, SubmitButton } from '../components';
+import postSignUp from '../api/auth';
 
 const Signup = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isValid, setIsValid] = React.useState(false);
+
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     authSchema.email.value = email;
@@ -21,6 +25,16 @@ const Signup = () => {
       setIsValid(false);
     }
   }, [email, password]);
+
+  const submitSignup = async () => {
+    const response = await postSignUp({
+      email,
+      password,
+    });
+    if (response.status === 200 || response.status === 201) {
+      navigate('/signin');
+    }
+  };
 
   return (
     <Container>
@@ -48,7 +62,7 @@ const Signup = () => {
             }}
           />
         </FormLabel>
-        <SubmitButton data-testid="signup-button" disabled={!isValid}>
+        <SubmitButton data-testid="signup-button" disabled={!isValid} onClick={submitSignup}>
           회원가입
         </SubmitButton>
       </AuthFormContainer>
