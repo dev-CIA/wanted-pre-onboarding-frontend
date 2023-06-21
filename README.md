@@ -6,7 +6,8 @@
 
 <br>
 
-## 데모 페이지
+## 데모 영상
+[데모 페이지로 이동](https://web-wanted-pre-onboarding-frontend-7xwyjq992llj5tnhjk.sel4.cloudtype.app)
 
 <br>
 
