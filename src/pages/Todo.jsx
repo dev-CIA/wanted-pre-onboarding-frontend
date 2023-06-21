@@ -1,6 +1,6 @@
 import React from 'react';
-import { AddInput, CheckCompleted } from '../components/todo';
-import { getTodos, deleteTodo } from '../api';
+import { AddInput, TodoItem } from '../components/todo';
+import { getTodos } from '../api';
 
 const Todo = () => {
   const [userData, setUserData] = React.useState([]);
@@ -27,25 +27,11 @@ const Todo = () => {
   if (error) return <pre>{error.stack}</pre>;
   if (isLoading) return 'Loading...';
 
-  const deleteData = async id => {
-    await deleteTodo(id);
-    setUserData(userData.filter(data => data.id !== id));
-  };
-
   return (
     <>
       <AddInput userData={userData} setUserData={setUserData} />
       {userData.map(data => (
-        <li key={data.id}>
-          <label>
-            <CheckCompleted {...data} />
-            <span>{data.todo}</span>
-          </label>
-          <button data-testid="modify-button">수정</button>
-          <button data-testid="delete-button" onClick={() => deleteData(data.id)}>
-            삭제
-          </button>
-        </li>
+        <TodoItem key={data.id} data={data} userData={userData} setUserData={setUserData} />
       ))}
     </>
   );
