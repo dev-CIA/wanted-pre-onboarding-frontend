@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const AuthFormContainer = styled.div`
+const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2em;
@@ -9,4 +9,4 @@ const AuthFormContainer = styled.div`
   padding: 2em;
 `;
 
-export default AuthFormContainer;
+export default FormContainer;
