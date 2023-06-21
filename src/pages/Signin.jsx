@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { AutoFormTitle, AuthFormContainer, FormLabel, FormInput, SubmitButton, AuthMessage } from '../components';
+import { Title, FormContainer, FormLabel, FormInput, SubmitButton, Message } from '../components/auth';
 import useValidate from '../hooks/useValidate';
 import { postSignin } from '../api/auth';
 
@@ -18,14 +18,15 @@ const Signin = () => {
       password,
     });
     if (response.status === 200 || response.status === 201) {
+      localStorage.setItem('accessToken', response.data.access_token);
       navigate('/todo');
     }
   };
 
   return (
     <Container>
-      <AutoFormTitle>로그인</AutoFormTitle>
-      <AuthFormContainer>
+      <Title>로그인</Title>
+      <FormContainer>
         <FormLabel>
           이메일
           <FormInput
@@ -51,10 +52,10 @@ const Signin = () => {
         <SubmitButton data-testid="signin-button" disabled={!isValid} onClick={submitSignin}>
           로그인
         </SubmitButton>
-        <AuthMessage>
+        <Message>
           회원이 아니신가요? <Link to={'/signup'}>회원가입 하러 가기</Link>
-        </AuthMessage>
-      </AuthFormContainer>
+        </Message>
+      </FormContainer>
     </Container>
   );
 };
