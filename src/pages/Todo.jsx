@@ -1,28 +1,34 @@
 import React from 'react';
 import { AddTodoInput } from '../components';
-
-const mockData = [
-  {
-    id: 1,
-    todo: 'todo2',
-    isCompleted: false,
-    userId: 1,
-  },
-  {
-    id: 2,
-    todo: 'todo3',
-    isCompleted: true,
-    userId: 1,
-  },
-];
+import getTodos from '../api/todos';
 
 const Todo = () => {
-  console.log();
+  const [userData, setUserData] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState();
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        setIsLoading(true);
+
+        const todos = await getTodos();
+        setUserData(todos);
+      } catch (e) {
+        setError(e);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+
+  if (error) return <pre>{error.stack}</pre>;
+  if (isLoading) return 'Loading...';
 
   return (
     <>
-      <AddTodoInput />
-      {mockData.map(data => (
+      <AddTodoInput data={userData} addTodo={setUserData} />
+      {userData.map(data => (
         <li key={data.id}>
           <label>
             <input type="checkbox" checked={data.isCompleted} onChange={() => {}} />
