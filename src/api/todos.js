@@ -39,4 +39,12 @@ const updateTodo = async ({ id, todo, isCompleted }) => {
   }
 };
 
-export { getTodos, createTodo, updateTodo };
+const deleteTodo = async id => {
+  try {
+    await axios.delete(`${URL}/todos/${id}`, todosConfig);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export { getTodos, createTodo, updateTodo, deleteTodo };
