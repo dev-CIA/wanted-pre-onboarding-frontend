@@ -17,6 +17,8 @@ const Signin = () => {
 
     if (isValidEmail && isValidPassword) {
       setIsValid(true);
+    } else {
+      setIsValid(false);
     }
   }, [email, password]);
 
