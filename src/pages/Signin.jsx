@@ -1,14 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AutoFormTitle, AuthFormContainer, FormLabel, FormInput, SubmitButton, AuthMessage } from '../components';
 import useValidate from '../hooks/useValidate';
+import { postSignin } from '../api/auth';
 
 const Signin = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const isValid = useValidate(email, password);
+  const navigate = useNavigate();
+
+  const submitSignin = async () => {
+    const response = await postSignin({
+      email,
+      password,
+    });
+    if (response.status === 200 || response.status === 201) {
+      navigate('/todo');
+    }
+  };
 
   return (
     <Container>
@@ -36,7 +48,7 @@ const Signin = () => {
             }}
           />
         </FormLabel>
-        <SubmitButton data-testid="signin-button" disabled={!isValid}>
+        <SubmitButton data-testid="signin-button" disabled={!isValid} onClick={submitSignin}>
           로그인
         </SubmitButton>
         <AuthMessage>
