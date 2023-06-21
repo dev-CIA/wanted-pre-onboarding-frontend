@@ -1,17 +1,13 @@
 import axios from 'axios';
 import URL from '../constants/todoUrl';
 
-const accessToken = localStorage.getItem('accessToken');
-
-const todosConfig = {
-  headers: {
-    Authorization: `Bearer ${accessToken}`,
-  },
-};
-
 const getTodos = async () => {
   try {
-    const response = await axios.get(`${URL}/todos`, todosConfig);
+    const response = await axios.get(`${URL}/todos`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
     return response;
   } catch (e) {
     console.error(e);
@@ -21,7 +17,15 @@ const getTodos = async () => {
 
 const createTodo = async newData => {
   try {
-    const response = await axios.post(`${URL}/todos`, { todo: newData }, todosConfig);
+    const response = await axios.post(
+      `${URL}/todos`,
+      { todo: newData },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      }
+    );
     return response;
   } catch (e) {
     console.error(e);
@@ -31,7 +35,15 @@ const createTodo = async newData => {
 
 const updateTodo = async ({ id, todo, isCompleted }) => {
   try {
-    const response = await axios.put(`${URL}/todos/${id}`, { todo, isCompleted }, todosConfig);
+    const response = await axios.put(
+      `${URL}/todos/${id}`,
+      { todo, isCompleted },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      }
+    );
     console.log('re', response);
   } catch (e) {
     console.error(e);
@@ -41,7 +53,11 @@ const updateTodo = async ({ id, todo, isCompleted }) => {
 
 const deleteTodo = async id => {
   try {
-    await axios.delete(`${URL}/todos/${id}`, todosConfig);
+    await axios.delete(`${URL}/todos/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
   } catch (e) {
     console.error(e);
   }

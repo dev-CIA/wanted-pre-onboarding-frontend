@@ -13,13 +13,17 @@ const Signin = () => {
   const navigate = useNavigate();
 
   const submitSignin = async () => {
-    const response = await postSignin({
-      email,
-      password,
-    });
-    if (response.status === 200 || response.status === 201) {
-      localStorage.setItem('accessToken', response.data.access_token);
-      navigate('/todo');
+    try {
+      const response = await postSignin({
+        email,
+        password,
+      });
+      if (response.status === 200 || response.status === 201) {
+        localStorage.setItem('accessToken', response.data.access_token);
+        navigate('/todo');
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
