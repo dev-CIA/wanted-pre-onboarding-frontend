@@ -1,6 +1,6 @@
 import React from 'react';
-import { AddTodoInput } from '../components';
-import getTodos from '../api/todos';
+import { AddInput, CheckCompleted } from '../components/todo';
+import { getTodos } from '../api';
 
 const Todo = () => {
   const [userData, setUserData] = React.useState([]);
@@ -12,8 +12,10 @@ const Todo = () => {
       try {
         setIsLoading(true);
 
-        const todos = await getTodos();
-        setUserData(todos);
+        const response = await getTodos();
+        if (response.status === 200 || response.status === 201) {
+          setUserData(response.data);
+        }
       } catch (e) {
         setError(e);
       } finally {
@@ -27,11 +29,11 @@ const Todo = () => {
 
   return (
     <>
-      <AddTodoInput data={userData} addTodo={setUserData} />
+      <AddInput userData={userData} setUserData={setUserData} />
       {userData.map(data => (
         <li key={data.id}>
           <label>
-            <input type="checkbox" checked={data.isCompleted} onChange={() => {}} />
+            <CheckCompleted {...data} />
             <span>{data.todo}</span>
           </label>
           <button data-testid="modify-button">수정</button>
