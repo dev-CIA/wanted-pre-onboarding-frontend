@@ -1,7 +1,7 @@
 import React from 'react';
-import { createTodo } from '../api';
+import { createTodo } from '../../api';
 
-const AddTodoInput = ({ userData, setUserData }) => {
+const AddInput = ({ userData, setUserData }) => {
   const [newTodo, setNewTodo] = React.useState('');
 
   const addTodo = async newTodo => {
@@ -29,4 +29,4 @@ const AddTodoInput = ({ userData, setUserData }) => {
   );
 };
 
-export default AddTodoInput;
+export default AddInput;
