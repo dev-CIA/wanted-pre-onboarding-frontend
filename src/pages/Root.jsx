@@ -1,12 +1,22 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Root = () => (
-  <Container>
-    <Outlet />
-  </Container>
-);
+const Root = () => {
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    (() => {
+      navigate('/signin');
+    })();
+  }, []);
+
+  return (
+    <Container>
+      <Outlet />
+    </Container>
+  );
+};
 
 export default Root;
 
