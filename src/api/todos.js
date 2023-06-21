@@ -19,4 +19,14 @@ const getTodos = async () => {
   }
 };
 
-export default getTodos;
+const createTodo = async newData => {
+  try {
+    const response = await axios.post(`${URL}/todos`, { todo: newData }, todosConfig);
+    return response;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+export { getTodos, createTodo };
