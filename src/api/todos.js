@@ -29,4 +29,14 @@ const createTodo = async newData => {
   }
 };
 
-export { getTodos, createTodo };
+const updateTodo = async ({ id, todo, isCompleted }) => {
+  try {
+    const response = await axios.put(`${URL}/todos/${id}`, { todo, isCompleted }, todosConfig);
+    console.log('re', response);
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+export { getTodos, createTodo, updateTodo };
